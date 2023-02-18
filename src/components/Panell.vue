@@ -3,11 +3,11 @@
         <div class="border border-4 border-dark rounded-4 p-4 web-attr-container">
             <div class="d-flex align-items-center mb-3">
                 <label class="form-label">Nombre de pàgines</label>
-                <input class="form-control" v-model="pagesValue"> <!-- @change="pagesChange($event)"> -->
+                <InputButtons @value="updatePages"/>
             </div>
             <div class="d-flex align-items-center">
                 <label class="form-label">Nombre d'idiomes</label>
-                <input class="form-control" v-model="languagesValue">
+                <InputButtons @value="updateLangs"/>
             </div>
         </div>
     </div>
@@ -17,20 +17,19 @@
 </template>
 
 <script>
+import InputButtons from "./InputButtons.vue"
+
 export default {
     name: 'Panell',
+    components: {
+        InputButtons,
+    },
     data() {
         return {
-            pagesValue: "",
-            languagesValue: ""
+            pagesValue: 1,
+            languagesValue: 1
         }
     },
-    // methods: {
-    //     pagesChange(e) {
-    //         console.log(e.target.value);
-    //         this.$emit("page", e.target.value);
-    //     }
-    // },
     watch: {
         pagesValue: function(val) {
             this.$emit("pages", val);
@@ -38,7 +37,15 @@ export default {
         languagesValue: function(val) {
             this.$emit("langs", val);
         },
-    }
+    },
+    methods: {
+        updatePages(n) {
+            this.pagesValue = n;
+        },
+        updateLangs(n) {
+            this.languagesValue = n;
+        }
+    },
 };
 </script>
 

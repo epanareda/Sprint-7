@@ -57,10 +57,10 @@ export default {
     },
     methods: {
         setPages(n) {
-            this.pages = Number(n);
+            this.pages = n;
         },
         setLangs(n) {
-            this.langs = Number(n);
+            this.langs = n;
         }
     },
     watch: {
@@ -69,6 +69,10 @@ export default {
             if(!val.includes("web-page")) {
                 this.pages = 0;
                 this.langs = 0;
+            } else {
+                // As well as set the minimum/start number at 1, for pages and languages.
+                this.pages = 1;
+                this.langs = 1;
             }
         }
     }
