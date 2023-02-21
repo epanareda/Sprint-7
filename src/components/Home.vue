@@ -1,5 +1,5 @@
 <template>
-    <div class="m-5">
+    <div class="my-5">
         <p class="m-0 mb-3">Què vols fer?</p>
         <form class="user-select-none">
             <div class="form-check mb-3">
