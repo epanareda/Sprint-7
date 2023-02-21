@@ -1,5 +1,5 @@
 <template>
-    <div class="m-5">
+    <div class="my-5 mx-3 mx-sm-5">
         <h3 class="fw-bold">WELCOME</h3>
         <p>
             Aquesta aplicació web ha estat creada amb la finalitat d’ajudar amb els càlculs de pressupostos de serveis relacionats amb el desenvolupament de pàgines web.
