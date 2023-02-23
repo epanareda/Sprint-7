@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import Panell from '../components/Panell.vue'
-import PressupostList from '../components/PressupostList.vue'
-import NameInputs from '../components/NameInputs.vue'
+import Panell from './Panell.vue'
+import PressupostList from './PressupostList.vue'
+import NameInputs from './NameInputs.vue'
 
 export default {
     name: 'Home',
