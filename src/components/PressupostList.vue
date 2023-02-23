@@ -1,10 +1,11 @@
 <template>
     <div class="list-container">
         <h5 class="mb-2">Pressupost list</h5>
-        <sorting-buttons class="mb-3" @sort="setSort"/>
+        <sorting-buttons class="mb-2" @sort="setSort"/>
+        <input-filter class="mb-3" @filter="setFilter"/>
         <div class="border-bottom border-start border-end border-2 border-dark rounded-2 p-4 py-0">
             
-            <div class="border border-1 rounded-4 p-3 shadow mb-3" v-for="(p, i) in sortedList" :key="i">
+            <div class="border border-1 rounded-4 p-3 shadow mb-3" v-for="(p, i) in filteredList" :key="i">
                 <div class="d-flex flex-column">
                     <p class="m-0">Pressupost: {{p.name}}</p>
                     <p class="m-0">Client: {{p.client}}</p>
@@ -36,11 +37,13 @@
 
 <script>
 import SortingButtons from "./SortingButtons.vue";
+import InputFilter from "./InputFilter.vue";
 
 export default {
     name: 'PressupostList',
     components: {
-        SortingButtons
+        SortingButtons,
+        InputFilter,
     },
     props: ["pressupost", "send"],
     data() {
@@ -57,6 +60,7 @@ export default {
             //     price: 500
             // }],
             sort: "",
+            filter: ["", ""],
         }
     },
     watch: {
@@ -72,10 +76,11 @@ export default {
             this.sort = val;
         },
         sortByName(a, b) {
-            if(a.name < b.name) {
+            // The strings are converted to lower case so the sorting ignores if its upper or lower case.
+            if(a.name.toLowerCase() < b.name.toLowerCase()) {
                 return -1;
             }
-            if(a.name > b.name) {
+            if(a.name.toLowerCase() > b.name.toLowerCase()) {
                 return 1;
             }
             return 0
@@ -88,6 +93,9 @@ export default {
                 return 1;
             }
             return 0
+        },
+        setFilter(arr) {
+            this.filter = arr;
         }
     },
     computed: {
@@ -100,6 +108,12 @@ export default {
             }
             return this.presList
         },
+        filteredList() {
+            if(this.filter[1] === "") {
+                return this.sortedList;
+            }
+            return this.sortedList.filter(e => e[this.filter[0]].match(this.filter[1]));
+        }
     }
 };
 </script>
