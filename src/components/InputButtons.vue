@@ -1,8 +1,8 @@
 <template>
     <div class="d-flex">
-        <button type="button" class="btn btn-warning text-white px-2 me-1" @click="value++">➕</button>
-        <input v-model="value">
-        <button type="button" class="btn btn-warning text-white px-2 ms-1" @click="value--">➖</button>
+        <button type="button" class="btn btn-warning text-white px-2 me-1" @click="val++">➕</button>
+        <input v-model="val">
+        <button type="button" class="btn btn-warning text-white px-2 ms-1" @click="val--">➖</button>
     </div>
 
 
@@ -12,16 +12,17 @@
 <script>
 export default {
     name: 'InptuButtons',
+    props: ["value"],
     data() {
         return {
-            value: 1,
+            val: this.value,
         }
     },
     watch: {
-        value: function(val) {
+        val: function(val) {
             // Making sure that any letter, 0 or negative number is set in the input.
-            if(val <= 1 || isNaN(+val)) this.value = 1;
-            this.$emit("value", this.value);
+            if(val <= 1 || isNaN(+val)) this.val = 1;
+            this.$emit("value", this.val);
         }
     }
 };

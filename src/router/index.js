@@ -17,9 +17,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../components/Welcome.vue')
   },
   {
+    // As I say at the before, I reset the path of home from "/" to "/home" once reached the exercice 4. On the commits before this exercice is set at "/", as it's said in the exercice 1.
     path: '/home',
     name: 'home',
-    component: Home
+    component: Home,
   },
 ]
 

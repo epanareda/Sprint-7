@@ -9,7 +9,7 @@
                         Una pàgina web (500 €)
                     </label>
                 </div>
-                <panell class="mb-3" v-if="check.includes('web-page')" @pages="setPages" @langs="setLangs"/>
+                <panell class="mb-3" v-if="check.includes('web-page')" :values="[pages, langs]" @pages="setPages" @langs="setLangs"/>
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" value="seo" id="seo" v-model="check">
                     <label class="form-check-label" for="seo">
@@ -70,6 +70,15 @@ export default {
             this.totalPrice += this.pages * this.langs * 30;
             return this.totalPrice;
         },
+        queryData() {
+            return {
+                    paginaWeb: this.check.includes("web-page"),
+                    campaniaSeo: this.check.includes("seo"),
+                    campaniaAds: this.check.includes("google-ads"),
+                    inPaginas: this.pages,
+                    inIdiomas: this.langs,
+                };
+        }
     },
     methods: {
         setPages(n) {
@@ -103,11 +112,18 @@ export default {
                 this.reset = true;
                 this.check = [];
             }
+        },
+        numberChecker(n) {
+            if(this.$route.query.paginaWeb === "true") {
+                if(n <= 1 || isNaN(+n)) return 1;
+                return n;
+            }
+            return 0
         }
     },
     watch: {
         // Makes sure that the pages and languages are set to 0 once the option of a webpage is removed.
-        check: function(val) {
+        check(val) {
             if(!val.includes("web-page")) {
                 this.pages = 0;
                 this.langs = 0;
@@ -116,6 +132,21 @@ export default {
                 this.pages = 1;
                 this.langs = 1;
             }
+        },
+        // Get data from url.
+        "$route.query": {
+            immediate: true,
+            handler(val) {
+                [["paginaWeb", "web-page"], ["campaniaSeo", "seo"], ["campaniaAds", "google-ads"]].forEach(e => {
+                    if(val[e[0]] === "true" && !this.check.includes(e[1])) this.check.push(e[1]);
+                });
+                this.pages = this.numberChecker(val.inPaginas);
+                this.langs = this.numberChecker(val.inIdiomas);
+            }
+        },
+        // Setting data for url.
+        queryData(val) {
+            this.$router.push({query: val})
         }
     }
 };

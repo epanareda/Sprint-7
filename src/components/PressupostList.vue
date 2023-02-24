@@ -17,20 +17,7 @@
                     <span class="bg-warning small px-2 rounded-pill" v-if="p.google">Google</span>
                 </div>
             </div>
-
             
-            <!-- <div class="border border-1 rounded-4 p-3 shadow mb-3">
-                <div class="d-flex flex-column">
-                    <p class="m-0">Pressupost: amazon</p>
-                    <p class="m-0">Client: Joan</p>
-                    <p class="m-0 mb-2">Preu: 500 €</p>
-                </div>
-                <div class="d-flex">
-                    <span class="bg-warning small px-2 rounded-pill me-2">web<sup>12/2</sup></span>
-                    <span class="bg-warning small px-2 rounded-pill me-2">SEO</span>
-                    <span class="bg-warning small px-2 rounded-pill">Google</span>
-                </div>
-            </div> -->
         </div>
     </div>
 </template>
@@ -49,16 +36,6 @@ export default {
     data() {
         return {
             presList: [],
-            //     {
-            //     web: true,
-            //     seo: false,
-            //     google: true,
-            //     pages: 2,
-            //     langs: 4,
-            //     name: "ee",
-            //     client: "45",
-            //     price: 500
-            // }],
             sort: "",
             filter: ["", ""],
         }

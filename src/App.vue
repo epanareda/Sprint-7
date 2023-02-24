@@ -1,12 +1,32 @@
 <template>
     <div :class="['main-container', $route.name === 'welcome' ? 'welcome' : 'home']">
         <nav>
-            <router-link class="btn btn-primary" to="/home" v-if="$route.name === 'welcome'">Endavant</router-link>
+            <router-link class="btn btn-primary" :to="routingHome" v-if="$route.name === 'welcome'">Endavant</router-link>
             <router-link class="btn btn-primary" to="/"  v-if="$route.name === 'home'">Enrere</router-link>
         </nav>
         <router-view/>
     </div>
 </template>
+
+<script>
+export default {
+    name: "App",
+    data() {
+        return {
+            routingHome: {
+                name: 'home',
+                query: {
+                    paginaWeb: false,
+                    campaniaSeo: false,
+                    campaniaAds: false,
+                    inPaginas: 0,
+                    inIdiomas: 0,
+                }
+            },
+        }
+    },
+}
+</script>
 
 <style scoped>
     .main-container {
